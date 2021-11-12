@@ -1,6 +1,5 @@
 package com.frameworks.dao;
 
-import com.frameworks.model.Pessoa;
 import com.frameworks.model.Pet;
 
 import javax.persistence.EntityManager;
@@ -21,7 +20,7 @@ public class PetDAO {
         em.persist(pet);
     }
 
-    public List<Pessoa> listar(){
+    public List<Pet> listar(){
 
         Query query = em.createQuery("select p from Pet p");
 

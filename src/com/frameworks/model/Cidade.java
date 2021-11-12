@@ -1,9 +1,6 @@
 package com.frameworks.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,9 +14,10 @@ public class Cidade {
 
     private String codigoIBGE;
 
+    @ManyToOne
     private Estado estado;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private List<Pessoa> pessoas;
 
     public String getNome() {

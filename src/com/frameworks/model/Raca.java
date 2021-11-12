@@ -1,9 +1,7 @@
 package com.frameworks.model;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Raca {
@@ -31,6 +29,7 @@ public class Raca {
         this.especie = especie;
     }
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
     public List<Pet> getPets() {
         return pets;
     }

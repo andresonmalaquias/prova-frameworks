@@ -1,8 +1,6 @@
 package com.frameworks.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Estado {
@@ -11,9 +9,20 @@ public class Estado {
     @GeneratedValue
     private Integer id;
 
+    private String nome;
+
     private String codigoIBGE;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Pais pais;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getCodigoIBGE() {
         return codigoIBGE;
@@ -31,7 +40,8 @@ public class Estado {
         this.pais = pais;
     }
 
-    public Estado(String codigoIBGE, Pais pais) {
+    public Estado(String nome, String codigoIBGE, Pais pais) {
+        this.nome = nome;
         this.codigoIBGE = codigoIBGE;
         this.pais = pais;
     }
@@ -43,6 +53,7 @@ public class Estado {
     public String toString() {
         return "Estado{" +
                 "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", codigoIBGE='" + codigoIBGE + '\'' +
                 ", pais=" + pais +
                 '}';

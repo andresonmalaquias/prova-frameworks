@@ -1,9 +1,7 @@
 package com.frameworks.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Pet {
@@ -17,8 +15,10 @@ public class Pet {
 
     private LocalDateTime nascimento;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Raca raca;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Pessoa proprietario;
 
     public String getNome() {
