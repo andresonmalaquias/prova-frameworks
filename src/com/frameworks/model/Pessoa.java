@@ -1,9 +1,6 @@
 package com.frameworks.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,6 +23,7 @@ public class Pessoa {
 
     private String endereco;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Cidade cidade;
 
     private PessoaENUM tipo;

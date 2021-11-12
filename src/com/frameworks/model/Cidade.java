@@ -3,6 +3,7 @@ package com.frameworks.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Cidade {
 
     private Estado estado;
 
+    @ManyToOne
     private List<Pessoa> pessoas;
 
     public String getNome() {
