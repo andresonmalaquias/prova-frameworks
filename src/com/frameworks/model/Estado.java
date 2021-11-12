@@ -13,6 +13,38 @@ public class Estado {
 
     private String codigoIBGE;
 
-    private 
+    private Pais pais;
 
+    public String getCodigoIBGE() {
+        return codigoIBGE;
+    }
+
+    public void setCodigoIBGE(String codigoIBGE) {
+        this.codigoIBGE = codigoIBGE;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    public Estado(String codigoIBGE, Pais pais) {
+        this.codigoIBGE = codigoIBGE;
+        this.pais = pais;
+    }
+
+    public Estado() {
+    }
+
+    @Override
+    public String toString() {
+        return "Estado{" +
+                "id=" + id +
+                ", codigoIBGE='" + codigoIBGE + '\'' +
+                ", pais=" + pais +
+                '}';
+    }
 }
