@@ -1,5 +1,6 @@
 package com.frameworks.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -10,7 +11,11 @@ public class Raca {
     private Integer id;
 
     private String nome;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Especie especie;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Pet> pets;
 
     public String getNome() {
@@ -29,22 +34,33 @@ public class Raca {
         this.especie = especie;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "raca")
     public List<Pet> getPets() {
         return pets;
     }
 
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
+    public void setPets(Pet pet) {
+        if(this.pets.contains(pet)){
+            this.pets.add(pet);
+            pet.setRaca(this);
+        }
     }
 
-    public Raca(String nome, Especie especie, List<Pet> pets) {
+    public Raca(String nome, Especie especie, Pet pet) {
         this.nome = nome;
         this.especie = especie;
-        this.pets = pets;
+        this.pets = new ArrayList<>();
+        this.pets.add(pet);
+    }
+
+    public Raca(String nome, Especie especie) {
+        this.nome = nome;
+        this.especie = especie;
+        this.pets = new ArrayList<>();
     }
 
     public Raca() {
+        this.pets = new ArrayList<>();
     }
 
     @Override

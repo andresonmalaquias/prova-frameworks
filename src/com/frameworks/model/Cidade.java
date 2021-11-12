@@ -1,6 +1,7 @@
 package com.frameworks.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,10 +15,10 @@ public class Cidade {
 
     private String codigoIBGE;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Estado estado;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cidade")
     private List<Pessoa> pessoas;
 
     public String getNome() {
@@ -48,18 +49,31 @@ public class Cidade {
         return pessoas;
     }
 
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
+    public void setPessoa(Pessoa pessoa) {
+        if(!this.pessoas.contains(pessoa)){
+            this.pessoas.add(pessoa);
+            pessoa.setCidade(this);
+        }
     }
 
-    public Cidade(String nome, String codigoIBGE, Estado estado, List<Pessoa> pessoas) {
+    public Cidade(String nome, String codigoIBGE, Estado estado, Pessoa pessoa) {
         this.nome = nome;
         this.codigoIBGE = codigoIBGE;
         this.estado = estado;
-        this.pessoas = pessoas;
+        this.pessoas = new ArrayList<>();
+        this.pessoas.add(pessoa);
     }
 
+    public Cidade(String nome, String codigoIBGE, Estado estado) {
+        this.nome = nome;
+        this.codigoIBGE = codigoIBGE;
+        this.estado = estado;
+        this.pessoas = new ArrayList<>();
+    }
+
+
     public Cidade() {
+        this.pessoas = new ArrayList<>();
     }
 
     @Override
