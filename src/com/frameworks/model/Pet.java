@@ -51,6 +51,7 @@ public class Pet {
 
     public void setRaca(Raca raca) {
         this.raca = raca;
+        raca.setPets(this);
     }
 
     public Pessoa getProprietario() {

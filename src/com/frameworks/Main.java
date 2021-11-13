@@ -67,12 +67,10 @@ public class Main {
         petDAO.inserir(pet2);
         petDAO.inserir(pet3);
 
-        em.getTransaction().commit();
-        em.close();
+
 
         RacaDAO racaDAO = new RacaDAO(em);
 
-        em.getTransaction().begin();
         racaDAO.inserir(raca1);
         racaDAO.inserir(raca2);
         racaDAO.inserir(raca3);
@@ -84,20 +82,15 @@ public class Main {
         racaDAO.inserir(raca10);
         racaDAO.inserir(raca12);
 
-        em.getTransaction().commit();
-        em.close();
 
         CidadeDAO cidadeDAO = new CidadeDAO(em);
 
-        em.getTransaction().begin();
+
         cidadeDAO.inserir(cidadeMan);
 
-        em.getTransaction().commit();
-        em.close();
 
         EstadoDAO estadoDAO = new EstadoDAO(em);
 
-        em.getTransaction().begin();
         estadoDAO.inserir(estadoCa);
         estadoDAO.inserir(estadoNy);
         estadoDAO.inserir(estadoSP);
@@ -117,7 +110,10 @@ public class Main {
 
         cidades = cidadeDAO.listarPorNomeParcial(nome);
 
-        System.out.println(cidades);
+        /*for (Cidade c: cidades) {
+            System.out.println(c);
+        }*/
+
 
 
         Pessoa p = new Pessoa();
@@ -150,6 +146,8 @@ public class Main {
         PessoaDAO pessoaDAO = new PessoaDAO(em);
         PetDAO petDAO = new PetDAO(em);
 
+        em.getTransaction().begin();
+
         racas = racaDAO.listarPorNomeParcial(nomeRaca);
         pessoas = pessoaDAO.listarPorNomeParcial(nome);
 
@@ -164,11 +162,40 @@ public class Main {
         em.close();
     }
 
+    public static void consultarPessoas(){
+        EntityManager em = JPAUtil.getEntityManager();
+
+        PessoaDAO pessoaDAO = new PessoaDAO(em);
+
+
+        for (Pessoa p : pessoaDAO.listar()) {
+            System.out.println(p.getNome());
+        }
+
+        em.close();
+    }
+
+    public static void consultarPets(){
+        EntityManager em = JPAUtil.getEntityManager();
+
+        PetDAO petDAO = new PetDAO(em);
+
+
+        for (Pet p : petDAO.listar()) {
+            System.out.println(p.getNome());
+        }
+
+        em.close();
+    }
+
     public static void main(String[] args) {
+
 
         //CriarNovosDados();
         //CriarPessoaComCidadeExistente();
         //CriarPetComRacaExistente();
+        //consultarPessoas();
+        consultarPets();
 
 
     }
